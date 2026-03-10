@@ -5,12 +5,15 @@ public class PalindromeCheckerApp {
     // Recursive method to check palindrome
     public static boolean isPalindrome(String str, int start, int end) {
 
+        // Recursive method to check palindrome
+    public static boolean isPalindrome(String str, int start, int end) {
+
         // Base condition
         if (start >= end) {
             return true;
         }
 
-        // If characters don't match
+        // If characters do not match
         if (str.charAt(start) != str.charAt(end)) {
             return false;
         }
@@ -23,10 +26,10 @@ public class PalindromeCheckerApp {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter a string to check palindrome:");
+        System.out.println("Enter a string to check if it is a palindrome:");
         String input = scanner.nextLine();
 
-        // Normalize input
+        // Convert to lowercase for case-insensitive comparison
         input = input.replaceAll("\\s+", "").toLowerCase();
 
         boolean result = isPalindrome(input, 0, input.length() - 1);
