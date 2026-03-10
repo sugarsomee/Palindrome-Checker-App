@@ -1,114 +1,40 @@
 import java.util.Scanner;
 
-class Node {
-    char data;
-    Node next;
+public class PalindromeCheckerApp {
 
-    Node(char data) {
-        this.data = data;
-        this.next = null;
-    }
-}
+    // Recursive method to check palindrome
+    public static boolean isPalindrome(String str, int start, int end) {
 
-public class UseCase8PalindromeCheckerApp {
+        // Recursive method to check palindrome
+    public static boolean isPalindrome(String str, int start, int end) {
 
-    // Function to reverse a linked list
-    public static Node reverse(Node head) {
-        Node prev = null;
-        Node current = head;
-        Node next = null;
-
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-
-        return prev;
-    }
-
-    // Function to check palindrome
-    public static boolean isPalindrome(Node head) {
-
-        if (head == null || head.next == null) {
+        // Base condition
+        if (start >= end) {
             return true;
         }
 
-        Node slow = head;
-        Node fast = head;
-
-        // Find middle using fast & slow pointers
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
+        // If characters do not match
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
         }
 
-        // Reverse second half
-        Node secondHalf = reverse(slow);
-        Node firstHalf = head;
-
-        // Compare halves
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data) {
-                return false;
-            }
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
-
-        return true;
+        // Recursive call
+        return isPalindrome(str, start + 1, end - 1);
     }
-public class UseCase7PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter a string to check palindrome:");
+        System.out.println("Enter a string to check if it is a palindrome:");
         String input = scanner.nextLine();
 
+        // Convert to lowercase for case-insensitive comparison
         input = input.replaceAll("\\s+", "").toLowerCase();
 
-        Node head = null;
-        Node tail = null;
+        boolean result = isPalindrome(input, 0, input.length() - 1);
 
-        // Convert string to linked list
-        for (char ch : input.toCharArray()) {
-            Node newNode = new Node(ch);
-
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-        // Normalize input
-        input = input.replaceAll("\\s+", "").toLowerCase();
-
-        Deque<Character> deque = new ArrayDeque<>();
-
-        // Insert characters into deque
-        for (char ch : input.toCharArray()) {
-            deque.addLast(ch);
-        }
-
-        boolean isPalindrome = true;
-
-        // Compare front and rear characters
-        while (deque.size() > 1) {
-
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-
-            if (front != rear) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        // Check palindrome
-        if (isPalindrome(head)) {
+        if (result) {
             System.out.println("The given string is a Palindrome.");
         } else {
             System.out.println("The given string is NOT a Palindrome.");
