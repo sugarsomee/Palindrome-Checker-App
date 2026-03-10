@@ -1,31 +1,46 @@
-import java.util.Stack;
+import java.util.*;
 
-public class UseCase5PalindromeCheckerApp {
+public class UseCase6PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Original string
-        String word = "madam";
+        Scanner scanner = new Scanner(System.in);
 
-        // Create stack
+        System.out.println("Enter a string to check palindrome:");
+        String input = scanner.nextLine();
+
+        // Convert to lowercase and remove spaces
+        input = input.replaceAll("\\s+", "").toLowerCase();
+
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        // Push characters into stack
-        for (int i = 0; i < word.length(); i++) {
-            stack.push(word.charAt(i));
+        // Enqueue and Push characters
+        for (char ch : input.toCharArray()) {
+            queue.add(ch);      // Enqueue (FIFO)
+            stack.push(ch);     // Push (LIFO)
         }
 
-        // Pop characters and build reversed string
-        String reversed = "";
-        while (!stack.isEmpty()) {
-            reversed = reversed + stack.pop();
+        boolean isPalindrome = true;
+
+        // Compare dequeue vs pop
+        while (!queue.isEmpty()) {
+            char fromQueue = queue.remove();  // Dequeue
+            char fromStack = stack.pop();     // Pop
+
+            if (fromQueue != fromStack) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Compare original and reversed strings
-        if (word.equals(reversed)) {
-            System.out.println(word + " is a Palindrome");
+        // Display result
+        if (isPalindrome) {
+            System.out.println("The given string is a Palindrome.");
         } else {
-            System.out.println(word + " is Not a Palindrome");
+            System.out.println("The given string is NOT a Palindrome.");
         }
+
+        scanner.close();
     }
 }
