@@ -1,60 +1,45 @@
 import java.util.Scanner;
 
-public class UseCase10PalindromeCheckerApp {
+// PalindromeChecker class encapsulates all palindrome logic
+class PalindromeChecker {
 
-    public static boolean isPalindrome(String str) {
+    // Method to check palindrome (case-insensitive, ignores spaces)
+    public boolean checkPalindrome(String input) {
+
+        if (input == null) {
+            return false;
+        }
+
+        // Normalize string: remove spaces and convert to lowercase
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
         int left = 0;
-        int right = str.length() - 1;
+        int right = normalized.length() - 1;
 
         while (left < right) {
-
-            if (str.charAt(left) != str.charAt(right)) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
                 return false;
             }
-
             left++;
             right--;
         }
 
         return true;
-public class PalindromeCheckerApp {
-
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String str, int start, int end) {
-
-        // Recursive method to check palindrome
-    public static boolean isPalindrome(String str, int start, int end) {
-
-        // Base condition
-        if (start >= end) {
-            return true;
-        }
-
-        // If characters do not match
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindrome(str, start + 1, end - 1);
     }
+}
+
+// Main application
+public class UseCase11PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        PalindromeChecker checker = new PalindromeChecker();
 
         System.out.println("Enter a string to check if it is a palindrome:");
         String input = scanner.nextLine();
 
-        // Normalize string (remove spaces and convert to lowercase)
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
-
-        if (isPalindrome(normalized)) {
-        // Convert to lowercase for case-insensitive comparison
-        input = input.replaceAll("\\s+", "").toLowerCase();
-
-        boolean result = isPalindrome(input, 0, input.length() - 1);
+        boolean result = checker.checkPalindrome(input);
 
         if (result) {
             System.out.println("The given string is a Palindrome.");
