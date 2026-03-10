@@ -1,6 +1,23 @@
-import java.util.*;
+import java.util.Scanner;
 
-public class UseCase6PalindromeCheckerApp {
+public class UseCase9PalindromeCheckerApp {
+
+    // Recursive method to check palindrome
+    public static boolean isPalindrome(String str, int start, int end) {
+
+        // Base condition
+        if (start >= end) {
+            return true;
+        }
+
+        // If characters don't match
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call
+        return isPalindrome(str, start + 1, end - 1);
+    }
 
     public static void main(String[] args) {
 
@@ -9,33 +26,12 @@ public class UseCase6PalindromeCheckerApp {
         System.out.println("Enter a string to check palindrome:");
         String input = scanner.nextLine();
 
-        // Convert to lowercase and remove spaces
+        // Normalize input
         input = input.replaceAll("\\s+", "").toLowerCase();
 
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
+        boolean result = isPalindrome(input, 0, input.length() - 1);
 
-        // Enqueue and Push characters
-        for (char ch : input.toCharArray()) {
-            queue.add(ch);      // Enqueue (FIFO)
-            stack.push(ch);     // Push (LIFO)
-        }
-
-        boolean isPalindrome = true;
-
-        // Compare dequeue vs pop
-        while (!queue.isEmpty()) {
-            char fromQueue = queue.remove();  // Dequeue
-            char fromStack = stack.pop();     // Pop
-
-            if (fromQueue != fromStack) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        // Display result
-        if (isPalindrome) {
+        if (result) {
             System.out.println("The given string is a Palindrome.");
         } else {
             System.out.println("The given string is NOT a Palindrome.");
