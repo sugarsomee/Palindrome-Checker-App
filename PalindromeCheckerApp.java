@@ -50,6 +50,7 @@ public class UseCase13PalindromeCheckerApp {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        PalindromeChecker checker = new PalindromeChecker();
 
         System.out.println("Enter a string to check if it is a palindrome:");
         String input = scanner.nextLine();
